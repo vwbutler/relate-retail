@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
     });
     res.status(200).json(tagData);
   } catch (err) {
-    res.status;
+    res.status(500).json(err);
   }
 });
 
@@ -51,7 +51,7 @@ router.put("/:id", async (req, res) => {
     const tagData = await Tag.update(req.body, {
       where: { id: req.params.id },
     });
-    if (updateTagData[0] === 0) {
+    if (tagData[0] === 0) {
       res
         .status(404)
         .json({ message: "We are unable to find a tag with this ID." });

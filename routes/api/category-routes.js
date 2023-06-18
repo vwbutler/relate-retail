@@ -12,6 +12,8 @@ router.get("/", async (req, res) => {
       include: [{ model: Product }],
     });
     res.status(200).json(categoryData);
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 
@@ -23,14 +25,19 @@ router.get("/:id", async (req, res) => {
       include: [{ model: Product }],
     });
     res.status(200).json(categoryData);
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 
 router.post("/", async (req, res) => {
   // create a new category
-  try { 
+  try {
     const categoryData = await Category.create(req.body);
     res.status(200).json(categoryData);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
   }
 });
 
@@ -41,7 +48,9 @@ router.put("/:id", async (req, res) => {
       where: { id: req.params.id },
     });
     if (updateCategoryData[0] === 0) {
-      res.status(404).json({ message: "We are unable to find a category with this ID." });
+      res
+        .status(404)
+        .json({ message: "We are unable to find a category with this ID." });
       return;
     }
     res.json({ message: "We have updated the category." });
@@ -55,17 +64,18 @@ router.delete("/:id", async (req, res) => {
   try {
     const deletedCategory = await Category.destroy({
       where: { id: req.params.id },
-      });
-      if (!deletedCategory) {
-        res.status(404).json({ message: "We are unable to find a category with this ID." });
-        return;
-      }
-      res.json({ message: "We have deleted the category." });
+    });
+    if (!deletedCategory) {
+      res
+        .status(404)
+        .json({ message: "We are unable to find a category with this ID." });
+      return;
+    }
+    res.json({ message: "We have deleted the category." });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
-
   }
 });
-
 
 module.exports = router;
