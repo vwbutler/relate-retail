@@ -41,13 +41,31 @@ router.post("/", async (req, res) => {
   }
 });
 
+// router.put("/:id", async (req, res) => {
+//   // update a category by its `id` value
+//   try {
+//     const categoryData = await Category.update(req.body, {
+//       where: { id: req.params.id },
+//     });
+//     if (updateCategoryData[0] === 0) {
+//       res
+//         .status(404)
+//         .json({ message: "We are unable to find a category with this ID." });
+//       return;
+//     }
+//     res.json({ message: "We have updated the category." });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
+
 router.put("/:id", async (req, res) => {
   // update a category by its `id` value
   try {
     const categoryData = await Category.update(req.body, {
       where: { id: req.params.id },
     });
-    if (updateCategoryData[0] === 0) {
+    if (categoryData[0] === 0) {
       res
         .status(404)
         .json({ message: "We are unable to find a category with this ID." });
