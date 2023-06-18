@@ -44,7 +44,7 @@ THEN I am able to successfully create, update, and delete data in my database
 
 ### Walkthrough
 
-  [View the 7.5-minute demonstration.](https://www.screencast.com/t/r7XRriUPdD)
+  [View the 4-minute demonstration.](https://www.screencast.com/t/rQ521BN5)
 
 
 ## 3. License
